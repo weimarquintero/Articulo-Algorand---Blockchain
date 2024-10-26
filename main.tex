@@ -37,39 +37,33 @@ weimar.quintero@udea.edu.co}
 \maketitle
 
 \begin{abstract}
-The {\it ACRA Proceedings} will appear in CD-ROM form only.
-To ensure that all papers in the {\it Proceedings} have a
-uniform appearance, authors are asked to adhere to the following
-instructions. In addition, we will accept, and in fact encourage, 
-submissions in the final format. This file includes the style instructions 
-for submissions.
+En el ámbito de blockchain, un \textbf{ledger} es un registro digital que guarda todas las transacciones realizadas en una red de blockchain. Este libro mayor es compartido y mantenido por todos los miembros de la red, asegurando que todos tengan una copia idéntica y actualizada de las transacciones.
+
+\textbf{Algorand} es una forma democrática y eficiente de implementar un ledger. A diferencia de las implementaciones basadas en prueba de trabajo, Algorand requiere muy poca computación y genera un historial de transacciones que casi nunca se bifurca. Utiliza aleatoriedad algorítmica para seleccionar verificadores que construyen el siguiente bloque de transacciones válidas, garantizando que estas selecciones sean inmunes a manipulaciones y transparentes para todos los usuarios.
+En este documento, exploraremos sus principales características, así como sus debilidades y las posibles soluciones para abordarlas.
+
+
 \end{abstract}
 
-\section{Introduction}
+\section{Introducción}
 
-Although ACRA is a CD-ROM only conference, papers should be prepared so that
-they can be printed out. 
 
-\subsection{Corresponding Author Details} 
-The corresponding author is requested to email the following
-information along with the paper: 1. title of the paper, 
-2. name and postal address, email address.
+Algorand es una plataforma de contratos inteligentes de nivel 1 que utiliza un protocolo de blockchain de código abierto, sin permisos y basado en Pure-Proof-of-Stake (PPoS). La red de Algorand opera con su propia criptomoneda nativa, ALGO. Mediante la asignación de ALGO, los usuarios pueden realizar transacciones peer-to-peer (P2P), impulsar aplicaciones descentralizadas (dApps) en la cadena, o simplemente apostar ALGO en la red principal para contribuir a la seguridad de la red y recibir recompensas inflacionarias a cambio. Fue diseñada para asegurar una verdadera descentralización, escalabilidad y seguridad para aplicaciones industriales.
 
-\subsection{Word Processing Software}
+Su principal objetivo es ofrecer una plataforma de contratos inteligentes robusta, de código abierto y accesible en el ámbito de las criptomonedas. Su moneda nativa, ALGO, respalda el creciente ecosistema de protocolos, mercados y aplicaciones descentralizadas (dApps). Algorand actúa como una plataforma de dinero digital, con ALGO impulsando su economía.
 
-As detailed below, ACRA has prepared and made available a set of
-\LaTeX{} macros and Word templates for use in formatting your paper.
-If you are using some other word processing software (such as
-WordPerfect, etc.), please follow the format instructions given below
-and ensure that your final paper looks as much like this sample as
-possible.
+Aunque es un proyecto joven, Algorand ya se ha implementado en varios casos de uso reales, como el soporte de la billetera Bitcoin en El Salvador y una plataforma descentralizada para transacciones de atención médica. A medida que su ecosistema sigue creciendo, la blockchain de Algorand ya está cumpliendo con su propósito original y ademas resuelve el \textbf{trilema} de la arquitectura blockchain.
 
-\section{Style and Format}
 
-\LaTeX{} and Bib\TeX{} style files, and Word templates that implement these 
-instructions can be retrieved electronically.  See the ACRA homepage for 
-details under
-\verb+http://www.araa.asn.au/acra+
+\section{Mecanismo de consenso}
+
+Algorand creó una versión única de un algoritmo de gobernanza mediante la implementación de Pure-Proof-of-Stake (PPoS). Los miembros de la red solo necesitan tener tokens ALGO para poder participar. PPoS opera en dos etapas:
+
+\textbf{Etapa 1:} Se selecciona aleatoriamente un token ALGO de los tokens disponibles. El dueño de este token propone el próximo bloque.
+
+\textbf{Etapa 2:} Se eligen al azar miles de tokens para votar, validar y aprobar el bloque. Cuantos más tokens tenga un participante, mayor será la probabilidad de ser seleccionado.
+
+Este proceso permite que todos los titulares de ALGO participen directamente en la gobernanza, proporcionando descentralización mediante la selección aleatoria de tokens en lugar de delegados. También proporciona seguridad, ya que reconoce la posible presencia de malos actores, pero limita su influencia a través de un proceso aleatorio y seudónimo. Con solo tokens seleccionados, es imposible realizar DDoS en los nodos más ocupados de la red. Finalmente, Algorand logra escalabilidad gracias a la selección de lotería casi instantánea que se ejecuta de manera independiente entre nodos, lo que aumenta significativamente la velocidad de propagación de bloques.
 
 \subsection{Layout}
 
@@ -244,7 +238,7 @@ As the files may be changed to fix bugs, you should ensure that you are using th
 \bibitem[\protect\citeauthoryear{S. Micali and Jing Chen\bgroup \em\egroup
   }{2017}]{abelson-et-al:scheme}
 Silvio Micali and Jing Chen.
-\newblock {\em ALGORAND}.
+\newblock ALGORAND.
 \newblock [Online]. Available: https://algorand.co/technology/research. [Accessed: 17- Oct- 2024].
 
 \bibitem[\protect\citeauthoryear{S. Micali and Jing Chen\bgroup \em\egroup
