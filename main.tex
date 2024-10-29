@@ -47,8 +47,8 @@ En este documento, exploraremos sus principales características, así como sus 
 
 \section{Introducción}
 
-
-Algorand es una plataforma de contratos inteligentes de nivel 1 que utiliza un protocolo de blockchain de código abierto, sin permisos y basado en Pure-Proof-of-Stake (PPoS). La red de Algorand opera con su propia criptomoneda nativa, ALGO. Mediante la asignación de ALGO, los usuarios pueden realizar transacciones peer-to-peer (P2P), impulsar aplicaciones descentralizadas (dApps) en la cadena, o simplemente apostar ALGO en la red principal para contribuir a la seguridad de la red y recibir recompensas inflacionarias a cambio. Fue diseñada para asegurar una verdadera descentralización, escalabilidad y seguridad para aplicaciones industriales.
+Algorand es una red blockchain y un proyecto fundado en 2017 por el profesor Silvio Micali, un científico informático del MIT. La red principal se lanzó en junio de 2019 junto con su criptomoneda nativa, \textbf{ALGO}.
+Tambien podemos definir Algorand como una plataforma de contratos inteligentes de nivel 1 que utiliza un protocolo de blockchain de código abierto, sin permisos y basado en Pure-Proof-of-Stake (PPoS). La red de Algorand opera con su propia criptomoneda nativa, ALGO. Mediante la asignación de ALGO, los usuarios pueden realizar transacciones peer-to-peer (P2P), impulsar aplicaciones descentralizadas (dApps) en la cadena, o simplemente apostar ALGO en la red principal para contribuir a la seguridad de la red y recibir recompensas inflacionarias a cambio. Fue diseñada para asegurar una verdadera descentralización, escalabilidad y seguridad para aplicaciones industriales.
 
 Su principal objetivo es ofrecer una plataforma de contratos inteligentes robusta, de código abierto y accesible en el ámbito de las criptomonedas. Su moneda nativa, ALGO, respalda el creciente ecosistema de protocolos, mercados y aplicaciones descentralizadas (dApps). Algorand actúa como una plataforma de dinero digital, con ALGO impulsando su economía.
 
@@ -65,153 +65,51 @@ Algorand creó una versión única de un algoritmo de gobernanza mediante la imp
 
 Este proceso permite que todos los titulares de ALGO participen directamente en la gobernanza, proporcionando descentralización mediante la selección aleatoria de tokens en lugar de delegados. También proporciona seguridad, ya que reconoce la posible presencia de malos actores, pero limita su influencia a través de un proceso aleatorio y seudónimo. Con solo tokens seleccionados, es imposible realizar DDoS en los nodos más ocupados de la red. Finalmente, Algorand logra escalabilidad gracias a la selección de lotería casi instantánea que se ejecuta de manera independiente entre nodos, lo que aumenta significativamente la velocidad de propagación de bloques.
 
-\subsection{Layout}
 
-Prepare manuscripts two columns to a page, in the manner in which these
-instructions are printed.  The exact dimensions for pages are:
-\begin{itemize}
-\item left and right margins: $.75''$
-\item column width: $3.375''$
-\item gap between columns: $.25''$
-\item top margin---first page: $1.375''$
-\item top margin---other pages: $.75''$
-\item bottom margin: $1.25''$
-\item column height---first page: $6.625''$
-\item column height---other pages: $9''$
-\end{itemize}
+\subsection{¿Cómo funciona?}
 
-All measurements assume an {\bf $8$-$1/2 \times 11''$} page size.  
-For A4-size paper use the given top and left margins, column width,
-height, and gap and modify the bottom and right margins as necessary.
+A diferencia de las cadenas de bloques de Prueba de Participación (PoS), Algorand no exige una participación mínima, eliminando una barrera de entrada significativa para el usuario promedio. En PoS, la escalabilidad a menudo se logra a costa de que unos pocos validadores con grandes participaciones dominen las aprobaciones de bloques. La Prueba de Trabajo (PoW) enfrenta un problema similar, ya que los grandes grupos de minería casi siempre ganan la carrera para crear nuevos bloques.
 
-\subsection{Title and Author Information}
+La clave de la escalabilidad de Algorand radica en su mecanismo de consenso de Prueba de Participación Pura (PPoS). Este protocolo permite procesar muchas transacciones rápidamente sin sacrificar la descentralización. En Algorand, los validadores y proponentes de bloques se eligen aleatoriamente entre todos los que han apostado y generado una clave de participación. La probabilidad de ser elegido está directamente relacionada con la proporción de la participación del participante en el monto total apostado.
 
-Center the title on the entire width of the page in a 14-point bold font.
-Place the names of authors below the title in a 12-point bold font, and
-affiliations and complete addresses directly below the author names in a
-12-point (non-bold) font.
 
-Credit to a sponsoring agency appears in a footnote at the bottom of the
-left column of the first page.  See the example in these instructions.
+\textit{Aunque un pequeño poseedor tiene menos posibilidades de ser seleccionado que un gran poseedor, cada staker que ejecuta un nodo es un posible validador. Esto hace que la seguridad de la red esté más descentralizada en comparación con un conjunto elegido de validadores, como en la prueba de participación delegada.}
 
-\subsection{Abstract}
 
-Place the abstract at the beginning of the first column $3.0''$ from the
-top of the page, unless that does not leave enough room for the title and
-author information.  Use a slightly smaller width than in the body of the
-paper.  Head the abstract with ``Abstract'' centered above the body of the
-abstract in a 12-point bold font.  The body of the abstract should be in
-the same font as the body of the paper.
+Cuando los usuarios apuestan y generan su clave de participación, se convierten en nodos de participación. Estos nodos se comunican a través de los nodos de retransmisión de Algorand. Durante la fase de propuesta de bloque, se seleccionan varios proponentes de bloque mediante una función aleatoria verificable (VRF), que toma en cuenta la proporción de la participación de cada validador. La identidad de los proponentes de bloque se mantiene en secreto hasta que se propone el nuevo bloque, lo que mejora la seguridad de la red al evitar ataques maliciosos contra el validador elegido. No obstante, un proponente puede demostrar su legitimidad mostrando su salida VRF junto con el bloque propuesto.
+Después de que se envía un bloque, se eligen aleatoriamente nodos de participación para formar parte del comité de votación suave. Esta fase filtra las propuestas, permitiendo que solo un candidato las agregue a la cadena de bloques. El poder de voto en este comité es proporcional a la cantidad apostada por cada nodo, y los votos se utilizan para seleccionar el bloque propuesto con el hash VRF más bajo. Esto garantiza que no se pueda atacar preventivamente al proponente de un bloque, ya que el hash VRF más bajo es un valor impredecible.
+Después de la etapa anterior, se forma un nuevo comité para verificar la integridad de las transacciones y evitar el doble gasto en el bloque. Si el comité valida el bloque, este se agrega a la cadena. Si no, el bloque es rechazado, la cadena de bloques entra en modo de recuperación y se selecciona un nuevo bloque. No hay penalización para el líder que propone un bloque defectuoso, lo que es un aspecto controvertido del mecanismo de consenso PPoS. La posibilidad de una bifurcación en Algorand es extremadamente baja, ya que solo una propuesta de bloque llega a la etapa de certificación a la vez. Una vez agregado el bloque, todas las transacciones se consideran finales.
 
-The abstract should be a concise, one-paragraph summary
-describing the general thesis and conclusion of your
-paper. A reader should be able to learn the purpose of the
-paper and the reason for its importance from the abstract. The
-abstract should be no more than 200 words long.
+\section{Tipos de nodos}
 
-\subsection{Text}
+La red Algorand se compone de dos tipos de nodos: nodos de \textbf{retransmisión} y nodos de \textbf{participación}. Los nodos de retransmisión actúan como centros de red, comunicándose con grupos de nodos de participación para enrutar bloques. Los nodos de participación se conectan a otros nodos similares, pero solo tienen un nodo de retransmisión conectado a la vez. Aunque tienen menos responsabilidades, estos nodos aún pueden participar en el consenso de la red.
 
-The main body of the text immediately follows the abstract. 
-Use 10-point type in a clear, readable font with 1-point leading (10 on
-11).  For reasons of uniformity, use Computer Modern font if possible.  If
-Computer Modern is unavailable, Times Roman is preferred.
+Según la documentación de Algorand, un nodo es considerado un nodo de retransmisión válido si cumple con dos condiciones:
 
-Indent when starting a new paragraph, except after major headings.
 
-\subsection{Headings and Sections}
+\textbf{1. }Está configurado para aceptar conexiones entrantes en un puerto de acceso público (por convención, el puerto 4161).
 
-When necessary, headings should be used to separate major sections of your
-paper.
-(These instructions use many headings to demonstrate their
-appearance---your paper should have fewer headings.)
+\textbf{2. }Su dirección IP pública (o un nombre DNS válido) y el puerto asignado están registrados en los registros SRV de Algorand para una red específica (MainNet/TestNet).
 
-\subsubsection{Section Headings}
+Un nodo de retransmisión debe ser capaz de soportar muchas conexiones y manejar la carga de procesamiento de los datos que fluyen hacia y desde estas conexiones. Por lo tanto, requieren significativamente más energía que los nodos de participación. Los nodos de retransmisión siempre se configuran en modo de archivo.
 
-Print section headings in 12-point bold type in the style shown in these
-instructions.  Leave a blank space of approximately 10 points above and 4
-points below section headings.  Number sections with arabic numerals.
 
-\subsubsection{Subsection Headings}
+\section{¿Qué es ALGO?}
 
-Print subsection headings in 11-point bold type.  Leave a blank space of
-approximately 8 points above and 3 points below subsection headings.
-Number subsections with the section number and the subsection number (in
-arabic numerals) separated by a period.
+ALGO es la criptomoneda nativa de Algorand y tiene un suministro máximo total de 10 mil millones de monedas, que se distribuirán hasta 2030. Con cada nuevo bloque forjado, se envía nuevo ALGO a billeteras específicas que ya contienen ALGO. Para recibir estas recompensas, debes tener al menos 1 ALGO en una billetera sin custodia. Estas recompensas pueden generar un rendimiento anual (APY) de aproximadamente 5-8(per cent) para los titulares de ALGO y se distribuyen aproximadamente cada 10 minutos. Este mecanismo convierte a ALGO en una de las criptomonedas más sencillas para generar ingresos pasivos, ya que permite el “staking pasivo” del token.
+ALGO se utiliza principalmente en la red para ejecutar contratos inteligentes, pagar tarifas de gas y realizar transacciones. Esto impulsa una variedad de aplicaciones descentralizadas (dApps), mercados, intercambios y más. Las tarifas en la red no solo se procesan rápidamente (con tiempos de bloque inferiores a 5 segundos), sino que también son muy asequibles, costando solo 0,001 ALGO por transacción.
 
-\subsubsection{Subsubsection Headings}
+\subsection{Principales casos de uso de ALGO}
 
-Print subsubsection headings in 10-point bold type.  Leave a blank space of
-approximately 6 points above subsubsection headings.  Do not number
-subsubsections.
+Como muchas otras criptomonedas nativas, ALGO tiene tres usos principales:
 
-\subsubsection{Special Sections}
-The acknowledgments section, if included, follows the main body of the text
-and is headed ``Acknowledgments,'' printed in the same style as a section
-heading, but without a number. 
-This section includes acknowledgments of help from
-colleagues, financial support, and permission to publish.  
-Please try to limit acknowledgments to no more than three sentences.
+\textbf{1. }ALGO se utiliza para pagar las tarifas de transacción en la red Algorand. Comparado con redes como Ethereum (ETH) y Bitcoin (BTC), Algorand ofrece tarifas muy bajas. Desde enero de 2022, cada transacción cuesta solo 0.0014.
 
-Any appendices follow the acknowledgments (or directly follow the text) and
-look like sections, except that they are numbered with capital letters
-instead of arabic numerals. 
+\textbf{2. }ALGO puede ser apostado para tener la oportunidad de ser seleccionado como proponente o validador de bloques.
 
-The references section is headed ``References,'' printed in the same
-style as a section heading, but without a number.
-A sample list of references is given at the end of these
-instructions.
-Use a consistent format for references, such as provided by
-Bib\TeX{}.
+\textbf{3. }ALGO se puede mantener en una billetera sin custodia para ganar recompensas con cada bloque que se añade exitosamente a la cadena.
 
-\subsection{Citations}
-
-Citations within the text should include the author's last name and
-the year of publication, for example \cite{cheeseman:probability}.
-Append lowercase letters to the year in cases of ambiguity.
-Treat multiple authors as in the following examples:
-\cite{abelson-et-al:scheme} (for more than two authors) and
-\cite{brachman-schmolze:kl-one} (for two authors).
-If the author portion of a citation is obvious, omit it,
-e.g., Levesque \shortcite{levesque:belief}.
-Collapse multiple citations as follows:
-\cite{levesque:functional-foundations,haugeland:mind-design}.%
-\nocite{abelson-et-al:scheme}%
-\nocite{brachman-schmolze:kl-one}%
-\nocite{cheeseman:probability}%
-\nocite{haugeland:mind-design}%
-\nocite{lenat:heuristics}%
-\nocite{levesque:functional-foundations}%
-\nocite{levesque:belief}
-
-\subsection{Footnotes} 
-Place footnotes at the bottom of the page in a 9-point font.\footnote{This is how your footnote should appear.} 
-Refer to them with superscript numbers. 
-Separate them from the text by a short line.\footnote{Note the line seperating these footnotes from the text.}
-Avoid footnotes as much as possible; they interrupt the flow of the text.
-
-\section{Illustrations}
-
-\subsection{General Instructions}
-Place illustrations (figures, drawings, tables, and photographs) throughout the paper at the places where they are first discussed, rather than at the end of the paper. If placed at the bottom or top of a page, illustrations may run across
-both columns. Securely attach them to the master form with glue stick, spray 
-adhesive, rubber cement, or white tape. Do not use transparent tape as the 
-printing process blurs copy under transparent tape.
-
-Number illustrations sequentially. Use references of the following form: 
-Figure 1, Table 2, etc. Place illustration numbers and captions under 
-illustrations. Leave a margin of 1/4-inch around the area covered by the 
-illustration and caption. Use 9-point type for captions, labels, and other 
-text in illustrations.
-
-1This is how your footnotes should appear. 2Note the line separating these footnotes from the text.
-
-Do not use line-printer printouts or screen-dumps for figures--they will be illegible when printed. Avoid screens or pattern fills as they tend to reproduce poorly.
-
-\section{Length of Papers} 
-Submissions must should be within 6 to 10 pages in length. 
-
-\section*{Acknowledgments}
-The preparation of these instructions and the LaTEX and BibTEX files that implement them was supported by Schlumberger Palo Alto Research, AT\&T Bell Laboratories, and Morgan Kaufmann Publishers.
+\textit{El tercer uso es un gran incentivo para que el usuario promedio invierta en ALGO. No es necesario interactuar con una aplicación descentralizada (DApp) para apostar las monedas ni esperar un período de bloqueo para empezar a ganar. Todo se gestiona automáticamente mediante contratos inteligentes. Además, Algorand publica una lista de proyectos que adoptan su tecnología blockchain, muchos de los cuales requieren el uso de ALGO.}
 
 \section*{Format Files}
 Using LaTEX A LaTEX style file for version 2.09 of LaTEX that implements these instructions has been prepared, as has a BibTEX style file for version 0.99c of BibTEX (not version 0.98i) that implements the citation and reference styles here.
